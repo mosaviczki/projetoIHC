@@ -38,7 +38,7 @@ def create_table():
         cursor.close()
         connection.close()
 
-def insert(codigo_voo, dataPartida, valorPassagem):
+def insertVoo(codigo_voo, dataPartida, valorPassagem):
     existe_na_tabela = read_one_id(codigo_voo)
     if existe_na_tabela != None:
         return 'Este codigo já existe na tabela'

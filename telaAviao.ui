@@ -244,16 +244,6 @@ border-radius: 5px</string>
     </size>
    </property>
   </widget>
-  <widget class="QTableView" name="tableView">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>10</y>
-     <width>771</width>
-     <height>501</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -283,6 +273,104 @@ border-radius: 5px</string>
     </rect>
    </property>
   </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>10</y>
+     <width>771</width>
+     <height>501</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(100, 100, 134);</string>
+   </property>
+   <column>
+    <property name="text">
+     <string>Código do avião</string>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="background">
+     <color>
+      <red>100</red>
+      <green>100</green>
+      <blue>235</blue>
+     </color>
+    </property>
+    <property name="foreground">
+     <brush brushstyle="SolidPattern">
+      <color alpha="255">
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </brush>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Modelo do avião</string>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="background">
+     <color>
+      <red>100</red>
+      <green>100</green>
+      <blue>235</blue>
+     </color>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Qtd. Assentos especiais</string>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="background">
+     <color>
+      <red>100</red>
+      <green>100</green>
+      <blue>235</blue>
+     </color>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Qtd. Assentos Normais</string>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="background">
+     <color>
+      <red>100</red>
+      <green>100</green>
+      <blue>235</blue>
+     </color>
+    </property>
+   </column>
+  </widget>
   <zorder>lineEdit</zorder>
   <zorder>pushButton</zorder>
   <zorder>radioButton_2</zorder>
@@ -291,9 +379,9 @@ border-radius: 5px</string>
   <zorder>pushButton_4</zorder>
   <zorder>pushButton_6</zorder>
   <zorder>pushButton_5</zorder>
-  <zorder>tableView</zorder>
   <zorder>label</zorder>
   <zorder>widget</zorder>
+  <zorder>tableWidget</zorder>
  </widget>
  <resources/>
  <connections/>

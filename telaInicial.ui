@@ -269,7 +269,7 @@ border-radius: 5px</string>
      </size>
     </property>
    </widget>
-   <widget class="QTableView" name="tableView">
+   <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
       <x>295</x>
@@ -277,6 +277,10 @@ border-radius: 5px</string>
       <width>781</width>
       <height>521</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(100, 100, 134);
+color: rgb(255, 255, 255);</string>
     </property>
    </widget>
   </widget>
