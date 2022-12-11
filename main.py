@@ -18,8 +18,6 @@ def voltar():
     excluirAviao.close()
     telaRelatorio.close()
 
-
-
 def relatorio():
     telaRelatorio.show()
 
@@ -30,6 +28,7 @@ class RelatorioWindow(QWidget):
         self.ui.setupUi(self)
         self.ui.pushButton.clicked.connect(voltar) 
 
+################ DADOS VOO ################
 def inserirVooWindow():
     inserirVoo.show()
     inserirVoo.pushButton.clicked.connect(voltar)
@@ -77,7 +76,7 @@ def dadosAviao():
         for j in range(len(lista[0])): #coluna
             item = QtWidgets.QTableWidgetItem(f"{lista[i][j]}")
             telaAviao.tableWidget.setItem(i,j, item)
-            
+
 def inserirAviaoWindow():
     inserirAviao.show()
     inserirAviao.pushButton.clicked.connect(voltar)
