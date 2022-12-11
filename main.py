@@ -1,5 +1,6 @@
 import sys, sqlite3, bancoDadosAviao, bancoDadosVoo
 from PyQt5 import uic, QtWidgets
+from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 from PyQt5.QtWidgets import *
 #from PySide2 import QtCore, QtGui
@@ -17,28 +18,7 @@ def voltar():
     excluirAviao.close()
     telaRelatorio.close()
 
-def aviaoWindow():
-    telaAviao.show()
-    dadosAviao()
-    telaAviao.pushButton_3.clicked.connect(voltar)
-    telaAviao.pushButton_4.clicked.connect(inserirAviaoWindow)
-    telaAviao.pushButton_5.clicked.connect(alterarAviaoWindow)
-    telaAviao.pushButton_6.clicked.connect(excluirAviaoWindow)
 
-def dadosAviao():
-    query = "SELECT * FROM aviao"
-    telaAviao.tableWidget.setRowCount(len(bancoDadosAviao.read_all(query)))
-    telaAviao.tableWidget.setColumnCount(len(bancoDadosAviao.read_all(query)[0]))
-    #telaAviao.tableWidget.setHorizontalHeaderLabels(["Codigo do avião","Modelo do avião", "Qtd assentos especiais", "Qtd assentos normais"])
-
-    # Inserindo os dados na tabela
-    dbAv = bancoDadosAviao
-    lista = dbAv.read_all(query)
-
-    for i in range(len(lista)): #linha
-        for j in range(len(lista[0])): #coluna
-            item = QtWidgets.QTableWidgetItem(f"{lista[i][j]}")
-            telaAviao.tableWidget.setItem(i,j, item)
 
 def relatorio():
     telaRelatorio.show()
@@ -55,7 +35,6 @@ def inserirVooWindow():
     inserirVoo.pushButton.clicked.connect(voltar)
     inserirVoo.pushButton_2.clicked.connect(inserirDadosVoo)
     dbVoo = bancoDadosAviao()
-
     inserirVoo.comboBox.addItem([])
 
 def inserirDadosVoo():
@@ -75,24 +54,44 @@ def excluirVooWindow():
     excluirVoo.show()
     excluirVoo.pushButton.clicked.connect(voltar)
 
+################ DADOS AVIÃO ################
+def aviaoWindow():
+    telaAviao.show()
+    #dadosAviao()
+    telaAviao.pushButton_3.clicked.connect(voltar)
+    telaAviao.pushButton_4.clicked.connect(inserirAviaoWindow)
+    telaAviao.pushButton_5.clicked.connect(alterarAviaoWindow)
+    telaAviao.pushButton_6.clicked.connect(excluirAviaoWindow)
+    dadosAviao()
+
+def dadosAviao():
+    query = "SELECT * FROM aviao"
+
+    dbAv = bancoDadosAviao
+    lista = dbAv.read_all(query)
+    telaAviao.tableWidget.setRowCount(len(dbAv.read_all(query)))
+    telaAviao.tableWidget.setColumnCount(len(dbAv.read_all(query)[0]))
+    
+    # Inserindo os dados na tabela
+    for i in range(len(lista)): #linha
+        for j in range(len(lista[0])): #coluna
+            item = QtWidgets.QTableWidgetItem(f"{lista[i][j]}")
+            telaAviao.tableWidget.setItem(i,j, item)
+            
 def inserirAviaoWindow():
     inserirAviao.show()
     inserirAviao.pushButton.clicked.connect(voltar)
     inserirAviao.pushButton_2.clicked.connect(inserirDadosAviao)
 
-
 def inserirDadosAviao():
     dbAv = bancoDadosAviao
     codigo_aviao = inserirAviao.lineEdit.text()
     modelo_aviao = inserirAviao.lineEdit_2.text()
-    qtdAssentoEspecial = inserirAviao.lineEdit_3.text()
-    qtdAssento = inserirAviao.lineEdit_4.text()
-    int(codigo_aviao)
-    modelo_aviao
-    int(qtdAssentoEspecial)
-    int(qtdAssento)
+    assentoTotalEsp = inserirAviao.lineEdit_3.text()
+    assentoTotal = inserirAviao.lineEdit_4.text()
+   
     try:
-        dbAv.insertAviao("INSERT INTO aviao(codigo_aviao, modelo_aviao, qtdAssentoEspecial, qtdAssento) VALUES('{}','{}','{}','{}')".format(codigo_aviao, modelo_aviao, qtdAssentoEspecial, qtdAssento))
+        dbAv.insertAviao("INSERT INTO aviao(codigo_aviao, modelo_aviao, assentoTotalEsp, assentoTotal) VALUES({},'{}',{},{})".format(int(codigo_aviao), modelo_aviao, int(assentoTotalEsp), int(assentoTotal)))
         #dadosAviao()
     except:
         print("Erro de conexão")
@@ -100,6 +99,19 @@ def inserirDadosAviao():
 def alterarAviaoWindow():
     alterarAviao.show()
     alterarAviao.pushButton.clicked.connect(voltar)
+    alterarAviao.pushButton_2.clicked.connect(update)
+
+def update():
+    codigo_aviao = alterarAviao.lineEdit.text()
+    modelo_aviao = alterarAviao.lineEdit_2.text()
+    assentoEspOcup = alterarAviao.lineEdit_3.text()
+    assentoNorOcup = alterarAviao.lineEdit_4.text()
+    dbAv = bancoDadosAviao
+    #dadosAviao()
+    try:
+        dbAv.updateAviao("UPDATE aviao SET modelo_aviao = '{}', assentoEspOcup = {}, assentoNorOcup = {} WHERE  codigo_aviao = {}".format(modelo_aviao, int(assentoEspOcup), int(assentoNorOcup), int(codigo_aviao)))
+    except:
+        print("Erro de conexão")
 
 def excluirAviaoWindow():
     excluirAviao.show()
@@ -109,8 +121,11 @@ def excluirAviaoWindow():
 def deletar():
     codigo_aviao = excluirAviao.lineEdit.text()
     dbAv = bancoDadosAviao
-    dbAv.delete(codigo_aviao)
-    dadosAviao()
+    #dadosAviao()
+    try:
+        dbAv.deleteAviao("DELETE FROM aviao WHERE codigo_aviao = {}".format(int(codigo_aviao)))
+    except:
+        print("Erro de conexão")
 
 #def main():
 app = QtWidgets.QApplication(sys.argv)

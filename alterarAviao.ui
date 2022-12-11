@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1221</width>
-    <height>640</height>
+    <height>603</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
     <rect>
      <x>340</x>
      <y>489</y>
-     <width>731</width>
+     <width>861</width>
      <height>16</height>
     </rect>
    </property>
@@ -36,23 +36,7 @@
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>159</y>
-     <width>821</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(136, 136, 136);
-border-radius: 10px
-</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>39</y>
+     <y>190</y>
      <width>821</width>
      <height>41</height>
     </rect>
@@ -68,8 +52,8 @@ border-radius: 10px
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>394</y>
-     <width>401</width>
+     <y>380</y>
+     <width>691</width>
      <height>31</height>
     </rect>
    </property>
@@ -158,9 +142,9 @@ border-radius: 5px</string>
   <widget class="QLineEdit" name="lineEdit_3">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>279</y>
-     <width>391</width>
+     <x>360</x>
+     <y>310</y>
+     <width>821</width>
      <height>41</height>
     </rect>
    </property>
@@ -174,8 +158,8 @@ border-radius: 10px
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>119</y>
+     <x>350</x>
+     <y>140</y>
      <width>181</width>
      <height>31</height>
     </rect>
@@ -196,8 +180,8 @@ border-radius: 10px
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>239</y>
-     <width>411</width>
+     <y>260</y>
+     <width>681</width>
      <height>31</height>
     </rect>
    </property>
@@ -210,7 +194,7 @@ border-radius: 10px
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Quantidades de assentos especiais</string>
+    <string>Quantidades assentos especiais ocupados</string>
    </property>
   </widget>
   <widget class="Line" name="line_2">
@@ -219,7 +203,7 @@ border-radius: 10px
      <x>313</x>
      <y>19</y>
      <width>20</width>
-     <height>601</height>
+     <height>571</height>
     </rect>
    </property>
    <property name="orientation">
@@ -230,7 +214,7 @@ border-radius: 10px
    <property name="geometry">
     <rect>
      <x>570</x>
-     <y>569</y>
+     <y>540</y>
      <width>241</width>
      <height>51</height>
     </rect>
@@ -253,27 +237,6 @@ border-radius: 5px</string>
      <width>30</width>
      <height>30</height>
     </size>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>4</y>
-     <width>161</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>Codigo avião</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -308,7 +271,7 @@ border-radius: 5px</string>
     <rect>
      <x>360</x>
      <y>430</y>
-     <width>381</width>
+     <width>811</width>
      <height>41</height>
     </rect>
    </property>
@@ -319,12 +282,12 @@ border-radius: 10px
 </string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_5">
+  <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>780</x>
-     <y>280</y>
-     <width>391</width>
+     <x>350</x>
+     <y>60</y>
+     <width>821</width>
      <height>41</height>
     </rect>
    </property>
@@ -335,28 +298,12 @@ border-radius: 10px
 </string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_6">
+  <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>780</x>
-     <y>430</y>
-     <width>401</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(136, 136, 136);
-border-radius: 10px
-</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_7">
-   <property name="geometry">
-    <rect>
-     <x>780</x>
-     <y>230</y>
-     <width>421</width>
+     <x>350</x>
+     <y>10</y>
+     <width>181</width>
      <height>31</height>
     </rect>
    </property>
@@ -369,28 +316,7 @@ border-radius: 10px
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Quant. de assentos especiais ocupados</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_8">
-   <property name="geometry">
-    <rect>
-     <x>780</x>
-     <y>390</y>
-     <width>431</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>Quantid. de assentos normais ocupados</string>
+    <string>Código do avião</string>
    </property>
   </widget>
  </widget>

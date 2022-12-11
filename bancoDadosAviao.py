@@ -15,8 +15,10 @@ def create_table():
                         CREATE TABLE aviao(
                         "codigo_aviao" INTEGER,
                         "modelo_aviao" TEXT,
-                        "qtdAssentoEspecial" INTEGER,
-                        "qtdAssento" INTEGER,
+                        "assentoTotalEsp" INTEGER,
+                        "assentoTotal" INTEGER,
+                        "assentoEspOcup" INTEGER,
+                        "assentoNorOcup" INTEGER,
                         PRIMARY KEY("codigo_aviao")
                     )''')
         connection.commit()
@@ -38,15 +40,32 @@ def insertAviao(query):
     except:
         print("Erro ao tentar inserir no banco de dados!")
 
-def delete(codigo_voo):
+"""
+def updateAviao():
     try:
-        #Script para a remoção de uma linha
-        query = '''DELETE FROM voo WHERE  codigo_voo = ?'''
+        # Script para atualização
         connection = conexao()
         cursor = connection.cursor()
-        cursor.execute(query, [codigo_voo] )
+        query = 'UPDATE aviao SET codigo_aviao = 47853, modelo_aviao ="Embraer", assentoEspOcup =10, assentoNorOcup =100 WHERE codigo_aviao = 47853'
+        connection.execute(query)
         connection.commit()
-        print('Registro deletado')
+        print('Update feito com sucesso')
+    except:
+        print('Erro ao conectar com o banco de dados. Função update')
+    finally:
+        cursor.close()
+        connection.close()
+"""
+
+def deleteAviao(query):
+    try:
+        #Script para a remoção de uma linha
+        connection = conexao()
+        cursor = connection.cursor()
+        cursor.execute(query)
+        connection.commit()
+        print("Registro deletado!")
+        return ("Registro deletado!")
     except:
         print('Erro ao conectar com o banco de dados. função delete')
 
@@ -66,3 +85,4 @@ def read_all(query):
     finally:
         cursor.close()
         connection.close()
+                        
