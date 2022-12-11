@@ -1,66 +1,44 @@
-import datetime
 import sqlite3
-from sqlite3.dbapi2 import Cursor, connect
 
 def conexao():
     try:
-        # Conexão ao banco de dados
-        connection = sqlite3.connect("dataBaseVoo.db")
-        return connection
+        conn = sqlite3.connect("dataBaseVoo.db")
+        return conn
     except:
         print('Erro ao conectar ao banco de dados')
 
 def create_table():
     try:
-        # Script para criar tabela
-        sql = '''
-                CREATE TABLE voo(
-                    codigo_voo integer primary key,
-                    dataPartida text,
-                    valorPassagem real,
-                )'''
-
-        # Criando o cursor
         connection = conexao()
         cursor = connection.cursor()
-        # Executando meu código sql acima
-        cursor.execute(sql)
-        # Efetivo a criação da tabela
+        cursor.execute('''
+                        CREATE TABLE voo(
+                        "codigo_voo" INTEGER primary key,
+                        "dataPartida" TEXT,
+                        "valorPassagem" REAL,
+                        "codigo_aviao" INTEGER,
+                        "modelo_aviao" INTEGER
+                    )''')
         connection.commit()
-
         print('Tabela criada com sucesso')
-
     except:
         print('Erro ao conectar com o banco de dados. Função create_table')
-
     finally:
         # Sempre fecha o cursor e a conexão
         cursor.close()
         connection.close()
 
-def insertVoo(codigo_voo, dataPartida, valorPassagem):
-    existe_na_tabela = read_one_id(codigo_voo)
-    if existe_na_tabela != None:
-        return 'Este codigo já existe na tabela'
-    
+def insertVoo(query):
     try:
-        # Script para inserção
-        sql = '''INSERT INTO voo( codigo_vooviao, dataPartida, valorPassagem)
-             VALUES (?, ?, ?)'''
-    
         connection = conexao()
         cursor = connection.cursor()
-        # Método em que passo a string, e uma lista que substituirá os simbolos "?" respectivamente.
-        cursor.execute(sql, [ codigo_voo, dataPartida, valorPassagem])
+        print(query)
+        cursor.execute(query)
         connection.commit()
-        print("Inserido com sucesso!")
+        print("Voo inserido com sucesso!")
         return ("Inserido com sucesso!")
-
-
     except:
-        print('Erro ao conectar com o banco de dados. Função insert')
-        return ('Erro ao conectar com o banco de dados.')
-
+        print("Erro ao tentar inserir no banco de dados!")
     finally:
         cursor.close()
         connection.close()
@@ -86,39 +64,28 @@ def update_table(codigo_voo, dataPartida, valorPassagem):
         cursor.close()
         connection.close()
 
-def delete(codigo_voo):
+def deleteVoo(query):
     try:
         #Script para a remoção de uma linha
-        delete = '''DELETE FROM voo WHERE  codigo_voo = ?'''
-
         connection = conexao()
         cursor = connection.cursor()
-        cursor.execute(delete, [codigo_voo] )
+        cursor.execute(query)
         connection.commit()
-        print('Registro deletado')
-
+        print("Registro deletado!")
+        return ("Registro deletado!")
     except:
         print('Erro ao conectar com o banco de dados. função delete')
-
     finally:
         cursor.close()
         connection.close()
 
-def read_all():
+def read_all(query):
     try:
-        # Script para ler todos os dados
-        sql = '''SELECT * FROM voo'''
-
         connection = conexao()
         cursor = connection.cursor()
-        cursor.execute(sql)
-
-        # rows são todos os meus registros
-        rows = cursor.fetchall()
-
+        cursor.execute(query)
+        rows = cursor.fetchall() # rows são todos os registros
         return rows
-
-
     except:
         print('Falha ao conectar-se com o banco. Função read_all')
     finally:
@@ -186,16 +153,3 @@ def read_valorPassagem(valorPassagem):
     finally:
         cursor.close()
         connection.close()
-
-
-if __name__ == '__main__':
-    '''
-    #insert(1, 1, 90)
-    #insert(2, 1, 30)
-    #insert(3, 1, 180)
-    #insert(4, 1, 360)
-    #update_table(0, 90, 4)
-    #delete(4)
-    #print(read_all())
-    #print(read_one(1)  )'''
-

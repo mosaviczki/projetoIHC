@@ -31,19 +31,30 @@ class RelatorioWindow(QWidget):
 ################ DADOS VOO ################
 def inserirVooWindow():
     inserirVoo.show()
+    consulta()
     inserirVoo.pushButton.clicked.connect(voltar)
     inserirVoo.pushButton_2.clicked.connect(inserirDadosVoo)
-    dbVoo = bancoDadosAviao()
-    inserirVoo.comboBox.addItem([])
 
 def inserirDadosVoo():
     codigo_voo = inserirVoo.lineEdit.text()
     dataPartida = inserirVoo.lineEdit_2.text()
     valorPassagem = inserirVoo.lineEdit_3.text()
+    codigo_aviao = inserirVoo.comboBox.currentText() 
+    print(codigo_aviao)
+    dbVoo = bancoDadosVoo
+    
     try:
-        bancoDadosVoo.insertVoo(codigo_voo, dataPartida, valorPassagem)
+        dbVoo.insertVoo("INSERT INTO voo (codigo_voo, dataPartida, valorPassagem, codigo_aviao) VALUES ({},'{}',{}, {})".format(int(codigo_voo), dataPartida, float(valorPassagem), int(codigo_aviao)))
     except sqlite3.Error as erro:
         print("Erro ao inserir no banco de dados")
+
+def consulta():
+    dbAv = bancoDadosAviao
+    listaDado = dbAv.consultaAviao("SELECT codigo_aviao FROM aviao")
+    for r in listaDado:
+        for x in r:
+            print(x)
+            inserirVoo.comboBox.addItem(str(x))
 
 def alterarVooWindow():
     alterarVoo.show()
@@ -52,6 +63,16 @@ def alterarVooWindow():
 def excluirVooWindow():
     excluirVoo.show()
     excluirVoo.pushButton.clicked.connect(voltar)
+    excluirVoo.pushButton_2.clicked.connect(deletarVoo)
+
+def deletarVoo():
+    codigo_voo = excluirAviao.lineEdit.text()
+    dbAv = bancoDadosVoo
+    #dadosAviao()
+    try:
+        dbAv.deleteAviao("DELETE FROM VOO WHERE codigo_aviao = {}".format(int(codigo_voo)))
+    except:
+        print("Erro de conexão")
 
 ################ DADOS AVIÃO ################
 def aviaoWindow():
@@ -115,9 +136,9 @@ def update():
 def excluirAviaoWindow():
     excluirAviao.show()
     excluirAviao.pushButton.clicked.connect(voltar)
-    excluirAviao.pushButton_2.clicked.connect(deletar)
+    excluirAviao.pushButton_2.clicked.connect(deletarAviao)
 
-def deletar():
+def deletarAviao():
     codigo_aviao = excluirAviao.lineEdit.text()
     dbAv = bancoDadosAviao
     #dadosAviao()

@@ -39,6 +39,9 @@ def insertAviao(query):
         return ("Inserido com sucesso!")
     except:
         print("Erro ao tentar inserir no banco de dados!")
+    finally:
+        cursor.close()
+        connection.close()
 
 """
 def updateAviao():
@@ -68,7 +71,6 @@ def deleteAviao(query):
         return ("Registro deletado!")
     except:
         print('Erro ao conectar com o banco de dados. função delete')
-
     finally:
         cursor.close()
         connection.close()
@@ -85,4 +87,19 @@ def read_all(query):
     finally:
         cursor.close()
         connection.close()
+
+def consultaAviao(query):
+    try:
+        connection = conexao()
+        cursor = connection.cursor()
+        cursor.execute(query)
+        rows = cursor.fetchall() # rows são todos os registros
+        return rows
+    except:
+        print('Falha ao conectar-se com o banco. Função read_all')
+    finally:
+        cursor.close()
+        connection.close()
+
+
                         
