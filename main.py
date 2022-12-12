@@ -1,10 +1,8 @@
 import sys, sqlite3, bancoDadosAviao, bancoDadosVoo
 from PyQt5 import uic, QtWidgets
-from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
-from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 from PyQt5.QtWidgets import *
-#from PySide2 import QtCore, QtGui
-from ui_relatorio import * 
+from PyQt5.QtCore import Qt, QSortFilterProxyModel
+from PyQt5.QtGui import QStandardItem, QStandardItemModel
 from bancoDadosAviao import *
 
 #Função para fechar janelas ao clicar em voltar
@@ -17,48 +15,132 @@ def voltar():
     alterarAviao.close()
     excluirAviao.close()
     telaRelatorio.close()
+    telaRelatorioI.close()
+
+def relatorioCod():
+    telaRelatorioI.show()
+    telaRelatorioI.pushButton.clicked.connect(voltar)
+    telaRelatorioI.pushButton_2.clicked.connect(relatorio)
 
 def relatorio():
+    codigo_voo = telaRelatorioI.lineEdit.text()
     telaRelatorio.show()
+    codigo_aviao = codVoo(codigo_voo)
+    total = calculaTotal(codigo_aviao)
+    ocupado = calculaOcupado(codigo_aviao)
+    ocupacao = ((ocupado*100)/total)
+    ocup = (f'{ocupacao:.2f}%')
+    telaRelatorio.label_6.setText(str(ocup))
+    telaRelatorio.label_7.setText(str(total)) 
+    telaRelatorio.label_8.setText(str(ocupado)) 
+    telaRelatorio.pushButton.clicked.connect(voltar)
 
-class RelatorioWindow(QWidget):
-    def __init__(self):
-        super(RelatorioWindow, self).__init__()
-        self.ui = Ui_Form() 
-        self.ui.setupUi(self)
-        self.ui.pushButton.clicked.connect(voltar) 
+def codVoo(codigo_voo):
+    db = bancoDadosVoo
+    a = db.consultaVoo("SELECT codigo_aviao FROM voo WHERE codigo_voo = {}".format(codigo_voo))
+    total = []
+    for x in a:
+        for y in x:
+            total.append(y)
+    som = sum(total)
+    return som
+
+def calculaTotal(codigo_aviao):
+    db = bancoDadosAviao
+    a = db.consultaAviao("SELECT assentoTotalEsp, assentoTotal FROM aviao WHERE codigo_aviao = {}".format(codigo_aviao))
+    total = []
+    for x in a:
+        for y in x:
+            total.append(y)
+    som = sum(total)
+    return som
+
+def calculaOcupado(codigo_aviao):
+    db = bancoDadosAviao
+    a = db.consultaAviao("SELECT assentoEspOcup, assentoNorOcup FROM aviao WHERE codigo_aviao = {}".format(codigo_aviao))
+    total = []
+    for x in a:
+        for y in x:
+            total.append(y)
+    som = sum(total)
+    return som
 
 ################ DADOS VOO ################
 def inserirVooWindow():
     inserirVoo.show()
-    consulta()
+    dadosVoo()
+    consultaCod()
     inserirVoo.pushButton.clicked.connect(voltar)
     inserirVoo.pushButton_2.clicked.connect(inserirDadosVoo)
+
+def dadosVoo():
+    query = "SELECT * FROM voo"
+    dbVoo = bancoDadosVoo
+    lista = dbVoo.read_all(query)
+    telaInicial.tableWidget.setRowCount(len(dbVoo.read_all(query)))
+    telaInicial.tableWidget.setColumnCount(len(dbVoo.read_all(query)[0]))
+    
+    # Inserindo os dados na tabela
+    for i in range(len(lista)): #linha
+        for j in range(len(lista[0])): #coluna
+            item = QtWidgets.QTableWidgetItem(f"{lista[i][j]}")
+            telaInicial.tableWidget.setItem(i,j, item)
 
 def inserirDadosVoo():
     codigo_voo = inserirVoo.lineEdit.text()
     dataPartida = inserirVoo.lineEdit_2.text()
     valorPassagem = inserirVoo.lineEdit_3.text()
     codigo_aviao = inserirVoo.comboBox.currentText() 
-    print(codigo_aviao)
     dbVoo = bancoDadosVoo
     
     try:
         dbVoo.insertVoo("INSERT INTO voo (codigo_voo, dataPartida, valorPassagem, codigo_aviao) VALUES ({},'{}',{}, {})".format(int(codigo_voo), dataPartida, float(valorPassagem), int(codigo_aviao)))
+        modelo_aviao = consultaMod(codigo_aviao)
+        updateModelo(modelo_aviao, codigo_voo)
+        dadosVoo()
     except sqlite3.Error as erro:
         print("Erro ao inserir no banco de dados")
 
-def consulta():
+def consultaCod():
     dbAv = bancoDadosAviao
     listaDado = dbAv.consultaAviao("SELECT codigo_aviao FROM aviao")
     for r in listaDado:
         for x in r:
-            print(x)
             inserirVoo.comboBox.addItem(str(x))
+            alterarVoo.comboBox.addItem(str(x))
+    
+def consultaMod(codigo_aviao):
+    dbAv = bancoDadosAviao
+    modelo = dbAv.consultaAviao("SELECT modelo_aviao FROM aviao WHERE codigo_aviao={}".format(codigo_aviao))
+    for name in modelo:
+        for model in name:
+            return model
 
 def alterarVooWindow():
     alterarVoo.show()
     alterarVoo.pushButton.clicked.connect(voltar)
+    alterarVoo.pushButton_2.clicked.connect(updateVoo)
+
+def updateVoo():
+    codigo_voo = alterarVoo.lineEdit.text()
+    dataPartida = alterarVoo.lineEdit_2.text()
+    valorPassagem = alterarVoo.lineEdit_3.text()
+    codigo_aviao = alterarVoo.comboBox.currentText()
+    print(codigo_aviao) 
+    dbVoo = bancoDadosVoo
+    try:
+        dbVoo.update_table(codigo_voo, dataPartida, valorPassagem, codigo_aviao)
+        modelo_aviao = consultaMod(codigo_aviao)
+        updateModelo(modelo_aviao, codigo_voo)
+    except:
+        print("Erro de conexão")
+
+def updateModelo(modelo_aviao, codigo_voo):
+    dbVoo = bancoDadosVoo
+    try:
+        dbVoo.update_table_modelo(modelo_aviao, codigo_voo)
+    except:
+        print("Erro de conexão")
 
 def excluirVooWindow():
     excluirVoo.show()
@@ -66,11 +148,11 @@ def excluirVooWindow():
     excluirVoo.pushButton_2.clicked.connect(deletarVoo)
 
 def deletarVoo():
-    codigo_voo = excluirAviao.lineEdit.text()
-    dbAv = bancoDadosVoo
+    codigo_voo = excluirVoo.lineEdit.text()
+    dbVoo = bancoDadosVoo
     #dadosAviao()
     try:
-        dbAv.deleteAviao("DELETE FROM VOO WHERE codigo_aviao = {}".format(int(codigo_voo)))
+        dbVoo.deleteVoo("DELETE FROM voo WHERE codigo_voo = {}".format(int(codigo_voo)))
     except:
         print("Erro de conexão")
 
@@ -78,10 +160,10 @@ def deletarVoo():
 def aviaoWindow():
     telaAviao.show()
     #dadosAviao()
-    telaAviao.pushButton_3.clicked.connect(voltar)
-    telaAviao.pushButton_4.clicked.connect(inserirAviaoWindow)
-    telaAviao.pushButton_5.clicked.connect(alterarAviaoWindow)
-    telaAviao.pushButton_6.clicked.connect(excluirAviaoWindow)
+    telaAviao.pushButton.clicked.connect(voltar)
+    telaAviao.pushButton_2.clicked.connect(inserirAviaoWindow)
+    telaAviao.pushButton_3.clicked.connect(alterarAviaoWindow)
+    telaAviao.pushButton_4.clicked.connect(excluirAviaoWindow)
     dadosAviao()
 
 def dadosAviao():
@@ -127,9 +209,8 @@ def update():
     assentoEspOcup = alterarAviao.lineEdit_3.text()
     assentoNorOcup = alterarAviao.lineEdit_4.text()
     dbAv = bancoDadosAviao
-    #dadosAviao()
     try:
-        dbAv.updateAviao("UPDATE aviao SET modelo_aviao = '{}', assentoEspOcup = {}, assentoNorOcup = {} WHERE  codigo_aviao = {}".format(modelo_aviao, int(assentoEspOcup), int(assentoNorOcup), int(codigo_aviao)))
+        dbAv.update_table(codigo_aviao, modelo_aviao, assentoEspOcup, assentoNorOcup)
     except:
         print("Erro de conexão")
 
@@ -157,11 +238,11 @@ excluirVoo = uic.loadUi("excluirVoo.ui")
 inserirAviao = uic.loadUi("inserirAviao.ui")
 alterarAviao = uic.loadUi("alterarAviao.ui")
 excluirAviao = uic.loadUi("excluirAviao.ui")
-telaRelatorio = RelatorioWindow()
+telaRelatorio = uic.loadUi("relatorio.ui")
+telaRelatorioI = uic.loadUi("relatorioInicial.ui")
 
-#telaInicial.pushButton.clicked.connect(pesquisarInicial)
 telaInicial.pushButton_2.clicked.connect(aviaoWindow)
-telaInicial.pushButton_3.clicked.connect(relatorio)
+telaInicial.pushButton_3.clicked.connect(relatorioCod)
 telaInicial.pushButton_4.clicked.connect(inserirVooWindow)
 telaInicial.pushButton_5.clicked.connect(alterarVooWindow)
 telaInicial.pushButton_6.clicked.connect(excluirVooWindow)
@@ -171,19 +252,5 @@ telaInicial.show()
 app.exec_()
 
 
-'''
-RELATORIO
-class MainWindow(QWidget):
-    def __init__(self):
-        super(MainWindow, self).__init__()
-        self.ui = Ui_Form()
-        self.ui.setupUi(self)
-  
-if __name__=="__main__":
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec_())
-'''  
 
 

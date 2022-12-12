@@ -43,27 +43,6 @@ def insertVoo(query):
         cursor.close()
         connection.close()
 
-def update_table(codigo_voo, dataPartida, valorPassagem):
-    try:
-        # Script para atualização
-        update = '''
-                UPDATE voo
-                SET codigo_voo = ?, dataPartida = ?, valorPassagem = ?
-                WHERE  codigo_voo = ?
-                '''
-        connection = conexao()
-        cursor = connection.cursor()
-        cursor.execute(update, [codigo_voo, dataPartida, valorPassagem])
-        connection.commit()
-        print('Update feito com sucesso')
-
-    except:
-        print('Erro ao conectar com o banco de dados. Função update')
-
-    finally:
-        cursor.close()
-        connection.close()
-
 def deleteVoo(query):
     try:
         #Script para a remoção de uma linha
@@ -91,6 +70,60 @@ def read_all(query):
     finally:
         cursor.close()
         connection.close()
+        
+def update_table(codigo_voo, dataPartida, valorPassagem, codigo_aviao):
+    try:
+        # Script para atualização
+        update = '''
+                UPDATE voo
+                SET dataPartida = ?, valorPassagem = ?, codigo_aviao = ?
+                WHERE  codigo_voo = ?
+                '''
+        connection = conexao()
+        cursor = connection.cursor()
+        print(codigo_voo, dataPartida, valorPassagem, codigo_aviao)
+        cursor.execute(update, [dataPartida, valorPassagem, codigo_aviao, codigo_voo])
+        connection.commit()
+        print('Update feito com sucesso')
+    except:
+        print('Erro ao conectar com o banco de dados. Função update')
+    finally:
+        cursor.close()
+        connection.close()
+
+def update_table_modelo(modelo_aviao, codigo_voo):
+    try:
+        # Script para atualização
+        update = '''
+                UPDATE voo
+                SET modelo_aviao = ?
+                WHERE  codigo_voo = ?
+                '''
+        connection = conexao()
+        cursor = connection.cursor()
+        cursor.execute(update, [modelo_aviao, codigo_voo])
+        connection.commit()
+        print('Update feito com sucesso')
+    except:
+        print('Erro ao conectar com o banco de dados. Função update')
+    finally:
+        cursor.close()
+        connection.close()
+
+def consultaVoo(query):
+    try:
+        connection = conexao()
+        cursor = connection.cursor()
+        cursor.execute(query)
+        rows = cursor.fetchall() # rows são todos os registros
+        return rows
+    except:
+        print('Falha ao conectar-se com o banco. Função consulta')
+    finally:
+        cursor.close()
+        connection.close()
+
+
 
 
 def read_one_id(codigo_voo):

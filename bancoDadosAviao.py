@@ -43,14 +43,18 @@ def insertAviao(query):
         cursor.close()
         connection.close()
 
-"""
-def updateAviao():
+def update_table(codigo_aviao, modelo_aviao, assentoEspOcup, assentoNorOcup):
     try:
         # Script para atualização
+        update = '''
+                UPDATE aviao
+                SET modelo_aviao = ?, assentoEspOcup = ?, assentoNorOcup = ?
+                WHERE  codigo_aviao = ?
+                '''
         connection = conexao()
         cursor = connection.cursor()
-        query = 'UPDATE aviao SET codigo_aviao = 47853, modelo_aviao ="Embraer", assentoEspOcup =10, assentoNorOcup =100 WHERE codigo_aviao = 47853'
-        connection.execute(query)
+        print(modelo_aviao, assentoEspOcup, assentoNorOcup, codigo_aviao)
+        cursor.execute(update, [modelo_aviao, assentoEspOcup, assentoNorOcup, codigo_aviao])
         connection.commit()
         print('Update feito com sucesso')
     except:
@@ -58,7 +62,6 @@ def updateAviao():
     finally:
         cursor.close()
         connection.close()
-"""
 
 def deleteAviao(query):
     try:
@@ -96,10 +99,15 @@ def consultaAviao(query):
         rows = cursor.fetchall() # rows são todos os registros
         return rows
     except:
-        print('Falha ao conectar-se com o banco. Função read_all')
+        print('Falha ao conectar-se com o banco. Função consulta')
     finally:
         cursor.close()
         connection.close()
 
 
-                        
+
+#query = "SELECT assentoTotalEsp, assentoTotal FROM aviao WHERE codigo_aviao = 38530"   
+#query = "SELECT assentoEspOcup, assentoNorOcup FROM aviao WHERE codigo_aviao = 38530"  
+#a = consultaAviao(query)
+
+#update_table(38530, 'Airbus A318', 8, 100)

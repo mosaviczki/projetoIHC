@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1084</width>
-    <height>681</height>
+    <width>1907</width>
+    <height>954</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,120 +17,13 @@
    <string notr="true">background-color: rgb(42, 42, 63);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>261</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>MS PGothic</family>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(136, 136, 136);
-border-radius: 10px</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>20</y>
-      <width>71</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(136, 136, 136);
-border-radius: 10px</string>
-    </property>
-    <property name="text">
-     <string>🔎</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>130</y>
-      <width>261</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Codigo do voo</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton_2">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>230</y>
-      <width>261</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Data de partida</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>360</y>
-      <width>241</width>
-      <height>51</height>
+      <x>30</x>
+      <y>750</y>
+      <width>321</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
@@ -156,10 +49,10 @@ border-radius: 5px</string>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>560</y>
-      <width>241</width>
-      <height>51</height>
+      <x>1570</x>
+      <y>750</y>
+      <width>321</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
@@ -185,10 +78,10 @@ border-radius: 5px</string>
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>560</y>
-      <width>241</width>
-      <height>51</height>
+      <x>410</x>
+      <y>750</y>
+      <width>321</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
@@ -214,10 +107,10 @@ border-radius: 5px</string>
    <widget class="QPushButton" name="pushButton_5">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>560</y>
-      <width>241</width>
-      <height>51</height>
+      <x>800</x>
+      <y>750</y>
+      <width>321</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
@@ -243,10 +136,10 @@ border-radius: 5px</string>
    <widget class="QPushButton" name="pushButton_6">
     <property name="geometry">
      <rect>
-      <x>830</x>
-      <y>560</y>
-      <width>241</width>
-      <height>51</height>
+      <x>1190</x>
+      <y>750</y>
+      <width>321</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
@@ -272,16 +165,91 @@ border-radius: 5px</string>
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>295</x>
+      <x>15</x>
       <y>11</y>
-      <width>781</width>
-      <height>521</height>
+      <width>1881</width>
+      <height>701</height>
      </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16000</width>
+      <height>980</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(100, 100, 134);
-color: rgb(255, 255, 255);</string>
+color: rgb(0, 0, 0);</string>
     </property>
+    <column>
+     <property name="text">
+      <string>Código do voo</string>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Data de partida</string>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Valor da Passagem</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Código do avião</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Modelo do avião</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -289,7 +257,7 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1084</width>
+     <width>1907</width>
      <height>22</height>
     </rect>
    </property>
