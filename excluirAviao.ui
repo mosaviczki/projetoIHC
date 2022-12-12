@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(42, 42, 63);</string>
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="Line" name="line_2">
@@ -25,6 +25,9 @@
       <width>20</width>
       <height>891</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(42, 42, 63);</string>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
@@ -40,7 +43,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(42, 42, 63);
+border-color: rgb(255, 255, 255);</string>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -56,7 +60,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(42, 42, 63);
+border-color: rgb(255, 255, 255);</string>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -83,37 +88,11 @@
      <enum>Qt::LeftToRight</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(42, 42, 63);
+color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>EXCLUIR</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>300</y>
-      <width>521</width>
-      <height>101</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Arial Black</family>
-      <pointsize>40</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>AVIÃO</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -134,7 +113,8 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(42, 42, 63);
+color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Codigo do Avião</string>
@@ -209,6 +189,62 @@ border-radius: 10px
 </string>
     </property>
    </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1911</width>
+      <height>921</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(42, 42, 63);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>290</y>
+       <width>521</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial Black</family>
+       <pointsize>40</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(42, 42, 63);
+color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>AVIÃO</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <zorder>frame</zorder>
+   <zorder>line_2</zorder>
+   <zorder>line</zorder>
+   <zorder>line_3</zorder>
+   <zorder>label</zorder>
+   <zorder>label_3</zorder>
+   <zorder>pushButton_2</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>lineEdit</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -1,8 +1,6 @@
 import sys, sqlite3, bancoDadosAviao, bancoDadosVoo
 from PyQt5 import uic, QtWidgets
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import Qt, QSortFilterProxyModel
-from PyQt5.QtGui import QStandardItem, QStandardItemModel
+from PyQt5.QtWidgets import QMessageBox
 from bancoDadosAviao import *
 
 #Função para fechar janelas ao clicar em voltar
@@ -68,8 +66,8 @@ def calculaOcupado(codigo_aviao):
 ################ DADOS VOO ################
 def inserirVooWindow():
     inserirVoo.show()
-    dadosVoo()
     consultaCod()
+    dadosVoo()
     inserirVoo.pushButton.clicked.connect(voltar)
     inserirVoo.pushButton_2.clicked.connect(inserirDadosVoo)
 
@@ -97,9 +95,9 @@ def inserirDadosVoo():
         dbVoo.insertVoo("INSERT INTO voo (codigo_voo, dataPartida, valorPassagem, codigo_aviao) VALUES ({},'{}',{}, {})".format(int(codigo_voo), dataPartida, float(valorPassagem), int(codigo_aviao)))
         modelo_aviao = consultaMod(codigo_aviao)
         updateModelo(modelo_aviao, codigo_voo)
-        dadosVoo()
+        QMessageBox.about(inserirVoo, "Sucesso", "Dados de voo inserido com sucesso")
     except sqlite3.Error as erro:
-        print("Erro ao inserir no banco de dados")
+        QMessageBox.about(inserirVoo, "ERRO", "Erro ao inserir no banco de dados")
 
 def consultaCod():
     dbAv = bancoDadosAviao
@@ -118,6 +116,7 @@ def consultaMod(codigo_aviao):
 
 def alterarVooWindow():
     alterarVoo.show()
+    dadosVoo()
     alterarVoo.pushButton.clicked.connect(voltar)
     alterarVoo.pushButton_2.clicked.connect(updateVoo)
 
@@ -132,18 +131,21 @@ def updateVoo():
         dbVoo.update_table(codigo_voo, dataPartida, valorPassagem, codigo_aviao)
         modelo_aviao = consultaMod(codigo_aviao)
         updateModelo(modelo_aviao, codigo_voo)
+        QMessageBox.about(alterarVoo, "Sucesso", "Dados de voo alterado com sucesso")
     except:
-        print("Erro de conexão")
+        QMessageBox.about(alterarVoo, "ERRO", "Erro de conexão")
 
 def updateModelo(modelo_aviao, codigo_voo):
     dbVoo = bancoDadosVoo
     try:
         dbVoo.update_table_modelo(modelo_aviao, codigo_voo)
+        dadosVoo()
     except:
         print("Erro de conexão")
 
 def excluirVooWindow():
     excluirVoo.show()
+    dadosVoo()
     excluirVoo.pushButton.clicked.connect(voltar)
     excluirVoo.pushButton_2.clicked.connect(deletarVoo)
 
@@ -153,8 +155,9 @@ def deletarVoo():
     #dadosAviao()
     try:
         dbVoo.deleteVoo("DELETE FROM voo WHERE codigo_voo = {}".format(int(codigo_voo)))
+        QMessageBox.about(excluirVoo, "Sucesso", "Dados de voo deletado com sucesso")
     except:
-        print("Erro de conexão")
+        QMessageBox.about(excluirVoo, "ERRO", "Erro de conexão")
 
 ################ DADOS AVIÃO ################
 def aviaoWindow():
@@ -194,9 +197,10 @@ def inserirDadosAviao():
    
     try:
         dbAv.insertAviao("INSERT INTO aviao(codigo_aviao, modelo_aviao, assentoTotalEsp, assentoTotal) VALUES({},'{}',{},{})".format(int(codigo_aviao), modelo_aviao, int(assentoTotalEsp), int(assentoTotal)))
-        #dadosAviao()
+        dadosAviao()
+        QMessageBox.about(inserirAviao, "Sucesso", "Dados do avião inserido com sucesso")
     except:
-        print("Erro de conexão")
+        QMessageBox.about(inserirAviao, "ERRO", "Erro de conexão")
 
 def alterarAviaoWindow():
     alterarAviao.show()
@@ -211,8 +215,9 @@ def update():
     dbAv = bancoDadosAviao
     try:
         dbAv.update_table(codigo_aviao, modelo_aviao, assentoEspOcup, assentoNorOcup)
+        QMessageBox.about(alterarAviao, "Sucesso", "Dados do avião alterado com sucesso")
     except:
-        print("Erro de conexão")
+         QMessageBox.about(alterarAviao, "ERRO", "Erro de conexão")
 
 def excluirAviaoWindow():
     excluirAviao.show()
@@ -225,8 +230,9 @@ def deletarAviao():
     #dadosAviao()
     try:
         dbAv.deleteAviao("DELETE FROM aviao WHERE codigo_aviao = {}".format(int(codigo_aviao)))
+        QMessageBox.about(deletarAviao, "Sucesso", "Dados do avião deletado com sucesso")
     except:
-        print("Erro de conexão")
+        QMessageBox.about(inserirAviao, "ERRO", "Erro de conexão")
 
 #def main():
 app = QtWidgets.QApplication(sys.argv)
@@ -240,7 +246,7 @@ alterarAviao = uic.loadUi("alterarAviao.ui")
 excluirAviao = uic.loadUi("excluirAviao.ui")
 telaRelatorio = uic.loadUi("relatorio.ui")
 telaRelatorioI = uic.loadUi("relatorioInicial.ui")
-
+dadosVoo()
 telaInicial.pushButton_2.clicked.connect(aviaoWindow)
 telaInicial.pushButton_3.clicked.connect(relatorioCod)
 telaInicial.pushButton_4.clicked.connect(inserirVooWindow)
