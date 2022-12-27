@@ -1,7 +1,7 @@
-import sys, sqlite3, bancoDadosAviao, bancoDadosVoo
+import sys, sqlite3
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
-from bancoDadosAviao import *
+from db import bancoDadosAviao, bancoDadosVoo
 
 #Função para fechar janelas ao clicar em voltar
 def voltar():
@@ -236,17 +236,18 @@ def deletarAviao():
 
 #def main():
 app = QtWidgets.QApplication(sys.argv)
-telaInicial = uic.loadUi("telaInicial.ui")
-telaAviao = uic.loadUi("telaAviao.ui")
-inserirVoo = uic.loadUi("inserirVoo.ui")
-alterarVoo = uic.loadUi("alterarVoo.ui")
-excluirVoo = uic.loadUi("excluirVoo.ui")
-inserirAviao = uic.loadUi("inserirAviao.ui")
-alterarAviao = uic.loadUi("alterarAviao.ui")
-excluirAviao = uic.loadUi("excluirAviao.ui")
-telaRelatorio = uic.loadUi("relatorio.ui")
-telaRelatorioI = uic.loadUi("relatorioInicial.ui")
-dadosVoo()
+telaInicial = uic.loadUi("ui/telaInicial.ui")
+telaAviao = uic.loadUi("ui/telaAviao.ui")
+inserirVoo = uic.loadUi("ui/inserirVoo.ui")
+alterarVoo = uic.loadUi("ui/alterarVoo.ui")
+excluirVoo = uic.loadUi("ui/excluirVoo.ui")
+inserirAviao = uic.loadUi("ui/inserirAviao.ui")
+alterarAviao = uic.loadUi("ui/alterarAviao.ui")
+excluirAviao = uic.loadUi("ui/excluirAviao.ui")
+telaRelatorio = uic.loadUi("ui/relatorio.ui")
+telaRelatorioI = uic.loadUi("ui/relatorioInicial.ui")
+telaInicial.show()
+#dadosVoo()
 telaInicial.pushButton_2.clicked.connect(aviaoWindow)
 telaInicial.pushButton_3.clicked.connect(relatorioCod)
 telaInicial.pushButton_4.clicked.connect(inserirVooWindow)
